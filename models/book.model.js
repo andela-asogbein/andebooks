@@ -14,17 +14,17 @@ var BookSchema = new Schema({
     blurb: {
       type: String,
       required: 'Enter description of the book so others know what it is about'
-    }
+    },
     available: {
       type: Boolean
     },
     pages: {
       type: Number,
       min: 1
-    }
+    },
     subject: {
       type: String
-    }
+    },
     addedBy: {
       type: Schema.Types.ObjectId,
       ref: 'User'
@@ -32,3 +32,4 @@ var BookSchema = new Schema({
 });
 
 var Book  = mongoose.model('Book', BookSchema);
+module.exports
