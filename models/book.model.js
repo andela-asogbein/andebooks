@@ -3,26 +3,32 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var BookSchema = new Schema({
-    title  : {
+    title: {
       type: String,
       required: 'Enter book title'
     },
-    author : {
+    author: {
       type: String,
       required: 'Enter name of author'
     },
-    blurb :{
+    blurb: {
       type: String,
       required: 'Enter description of the book so others know what it is about'
     }
-    available : {
+    available: {
       type: Boolean
     },
-    pages : {
+    pages: {
       type: Number,
-      min : 1
+      min: 1
     }
     subject: {
-      type : String
+      type: String
+    }
+    addedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     }
 });
+
+var Book  = mongoose.model('Book', BookSchema);
