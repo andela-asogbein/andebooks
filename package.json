@@ -1,0 +1,27 @@
+{
+  "name": "andebooks",
+  "version": "0.0.1",
+  "description": "A web app to simplify the process of tracking and borrowing books in a library e.g. the Andela Library.",
+  "main": "app.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andela-asogbein/andebooks.git"
+  },
+  "author": "Jibola Sogbein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-asogbein/andebooks/issues"
+  },
+  "homepage": "https://github.com/andela-asogbein/andebooks",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
+    "mongoose": "^4.0.2"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
