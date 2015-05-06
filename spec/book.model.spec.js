@@ -56,5 +56,13 @@ describe('Testing Book model', function(){
 
 
   });
+    afterEach(function (done){
+      Book.remove(function (error){
+        if (error){
+          return done(error);
+        }
+      done();
+      });
+   });
 
 });
