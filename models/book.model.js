@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -26,10 +28,10 @@ var BookSchema = new Schema({
       type: String
     },
     addedBy: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
+      type: String
+      //type: Schema.Types.ObjectId,
+      //ref: 'User'
     }
 });
 
-var Book  = mongoose.model('Book', BookSchema);
-module.exports
+module.exports = mongoose.model("Book", BookSchema);
