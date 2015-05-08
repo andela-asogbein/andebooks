@@ -1,4 +1,6 @@
-var Book = require('../models/book.model');
+'use strict';
+
+var Book = require(../models/book.model.js);
 
 module.exports = {
   addBook: function(req, res){
@@ -6,17 +8,16 @@ module.exports = {
       if(err){
         return res.json(err);
       }
-      res.status(201).json(book);
+      res.status(201).json(blog);
     });
   },
 
   getBooks: function(req, res){
     Book.find({}).exec(function(err, books){
       if(err){
-        console.log(err);
         return res.json(err);
       }
-      res.status(201).json(books);
+      res.send(books);
     });
   },
 
@@ -25,16 +26,16 @@ module.exports = {
       if(error){
         return res.json(err)
       }
-      res.status(201).json(book);
+      res.send(book);
     })
   },
 
   updateBook: function(req, res){
     Book.update({_id: req.params.book_id}, req.body, function(err, book){
       if(err){
-        return res.json(err);
+        return res.json(err)
       }
-      res.status(201).json(book);
+      res.status(201).json(blog);
     });
   },
 
@@ -43,7 +44,7 @@ module.exports = {
       if(err){
         return res.json(err);
       }
-      res.status(200).json(book);
+      res.status(200).json(blog);
     })
   }
 
