@@ -1,6 +1,8 @@
 'use strict';
 
-var Book = require(../models/book.model.js);
+var mongoose = require('mongoose');
+require("../models/book.model")
+var Book = mongoose.model("Book");
 
 module.exports = {
   addBook: function(req, res){
@@ -8,16 +10,17 @@ module.exports = {
       if(err){
         return res.json(err);
       }
-      res.status(201).json(blog);
+      res.status(201).json(book);
     });
   },
 
   getBooks: function(req, res){
+    // console.log(Book);
     Book.find({}).exec(function(err, books){
       if(err){
         return res.json(err);
       }
-      res.send(books);
+      res.status(200).json(books);
     });
   },
 
@@ -26,7 +29,7 @@ module.exports = {
       if(error){
         return res.json(err)
       }
-      res.send(book);
+      res.status(200).json(book);
     })
   },
 
@@ -35,7 +38,7 @@ module.exports = {
       if(err){
         return res.json(err)
       }
-      res.status(201).json(blog);
+      res.status(201).json(book);
     });
   },
 
@@ -44,7 +47,7 @@ module.exports = {
       if(err){
         return res.json(err);
       }
-      res.status(200).json(blog);
+      res.status(200).json(book);
     })
   }
 

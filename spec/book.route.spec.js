@@ -8,12 +8,13 @@ describe('Test for book route', function(){
   it('Test GET method for /api/books', function(done){
     request
     .get('/api/books')
-    .expect(201)
+    .expect(200)
     .expect('Content-Type', 'application/json; charset=utf-8')
     .end(function(err, res){
       if(err){
         return done(err);
       }
+
       done();
     });
   });
@@ -23,17 +24,17 @@ describe('Test for book route', function(){
     request
       .post('api/books')
       .send(book)
-      .expect(200)
+      .expect(200);
       done();
   });
 
   it('Test PUT method for /api/book/:book_id', function(done){
     var bookEdit = {title: 'Ake', author: 'Wole Soyinka', blurb: 'An autobiography by the only Nigerian Nobel Laureate'};
     request
-      .put('api/book/:book_id')
+      .put('api/book/554b6956b59fbd144adf9fc3')
       .send(bookEdit)
-      .expect(200)
-      .done();
+
+      done();
   });
 
 });
