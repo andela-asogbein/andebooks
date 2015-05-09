@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-require("../models/book.model")
+require("../models/book.model");
 var Book = mongoose.model("Book");
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
 
   getOneBook: function(req, res){
     Book.findById({_id: req.params.book_id}, function(err, book){
-      if(error){
+      if(err){
         return res.json(err)
       }
       res.status(200).json(book);

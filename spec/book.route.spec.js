@@ -14,7 +14,7 @@ describe('Test for book route', function(){
       if(err){
         return done(err);
       }
-
+      //console.log(res.body);
       done();
     });
   });
@@ -25,16 +25,36 @@ describe('Test for book route', function(){
       .post('api/books')
       .send(book)
       .expect(200);
+
       done();
   });
 
-  it('Test PUT method for /api/book/:book_id', function(done){
-    var bookEdit = {title: 'Ake', author: 'Wole Soyinka', blurb: 'An autobiography by the only Nigerian Nobel Laureate'};
+
+  it('Test PUT method for /api/v1/users/:id', function(done){
+    var bookEdit = {title: 'Ake', author: 'Wole Soyinka', blurb: 'An autobiography of a writer'};
     request
-      .put('api/book/554b6956b59fbd144adf9fc3')
-      .send(bookEdit)
-
-      done();
+      .get('/api/v1/users')
+      .expect(200)
+      .end(function(err, res){
+        if(err){
+          return done(err);
+        }
+        request
+          .put('/api/v1/users/' + res.body[0]._id)
+          .send(editedUser)
+          .expect(200)
+          .end(function(err, res){
+          if(err){
+            return done(err);
+          }
+          expect(res.body).not.toBeNull();
+          console.log(res.body);
+          done();
+        });
+    });
   });
+
 
 });
+
+

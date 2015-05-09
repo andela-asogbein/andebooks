@@ -32,5 +32,4 @@ var BookSchema = new Schema({
     }
 });
 
-// mongoose.model("Book", BookSchema);
 mongoose.model("Book", BookSchema);

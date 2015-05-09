@@ -12,8 +12,11 @@ var UserSchema = new Schema({
   password: {
     type: String,
     required: 'Choose a password'
-  }
+  },
+  email: {
+    type: String
+  },
+  admin: Boolean
 });
 
-var User = mongoose.model('User', UserSchema);
-//module.exports = mongoose.model('User', UserSchema);
+mongoose.model('User', UserSchema);
