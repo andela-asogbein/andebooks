@@ -1,11 +1,21 @@
 'use strict';
 
-module.exports = function(app){
-  var book = require('../controllers/book.controller');
+var express = require('express');
+var bookRouter = express.Router();
 
-  app.get('/api/books', book.getBooks); //get all books
-  app.get('/api/book/:book_id', book.getOneBook);
-  app.post('/api/books', book.addBook); //add a book
-  app.put('/api/book/:book_id', book.updateBook); //update a book entry
-  app.delete('/api/book/:book_id', book.deleteBook); //delete a book
-}
+var book = require('../controllers/book.controller');
+var user = require('../controllers/user.controller');
+
+module.exports = function(app){
+
+  bookRouter.route('/books')
+    .get(book.getBooks)
+    .post(book.addBook);
+
+  bookRouter.route('/book/:book_id')
+    .get(book.getOneBook)
+    .put(book.updateBook)
+    .delete(book.deleteBook);
+
+  app.use('/api', bookRouter);
+};

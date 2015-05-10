@@ -58,7 +58,7 @@ module.exports = {
   },
 
   getUsers: function(req, res){
-    User.find({}).exec(function(err, users){
+    User.find(function(err, users){
       if(err){
         return res.json(err);
       }
@@ -92,5 +92,4 @@ module.exports = {
       res.status(200).json(user);
     });
   }
-
 };
