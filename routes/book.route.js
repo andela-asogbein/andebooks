@@ -8,13 +8,13 @@ var user = require('../controllers/user.controller');
 
 module.exports = function(app){
   bookRouter.route('/books')
-    .get(user.verifyToken, book.getBooks)
-    .post(book.addBook);
+    .get(book.getBooks)
+    .post(user.verifyToken, book.addBook);
 
   bookRouter.route('/book/:book_id')
     .get(book.getOneBook)
-    .put(book.updateBook)
-    .delete(book.deleteBook);
+    .put(user.verifyToken, book.updateBook)
+    .delete(user.verifyToken, book.deleteBook);
 
   app.use('/api', bookRouter);
 };
