@@ -14,7 +14,7 @@ module.exports = function(app){
 
   userRouter.route('/users')
     .get(user.getUsers)
-    .post(user.verifyToken, user.addUser);
+    .post(user.addUser);
 
   userRouter.route('/user/:user_id')
     .get(user.getOneUser)
