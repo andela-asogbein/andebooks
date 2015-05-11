@@ -9,7 +9,6 @@ var User = mongoose.model('User');
 var jwt =require('jsonwebtoken');
 var superSecret = 'andebookswebapplication';
 
-
 module.exports = {
 
   authenticateUser: function(req, res){
