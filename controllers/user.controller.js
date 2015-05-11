@@ -32,7 +32,6 @@ module.exports = {
         else{
           var token = jwt.sign({
             username: user.username,
-            password: user.password,
             email: user.email
           }, superSecret, {
               expiresInMinutes: 1440
@@ -45,6 +44,30 @@ module.exports = {
         }
       }
     });
+  },
+
+  verifyToken: function(req, res, next) {
+    var token = req.headers['x-access-token'];
+
+    //if there is a token, decode it
+    if(token){
+      jwt.verify(token, superSecret, function(err, decoded){
+        if(err){
+          res.json({
+            message: 'Token could not be authenticated'
+          });
+        }
+        else{
+          req.decoded = decoded;
+          //console.log(req.decoded);
+          next();
+        }
+      });
+    }else{
+      return res.status(403).json({
+        message: 'Token not found'
+      });
+    }
   },
 
   addUser: function(req, res){

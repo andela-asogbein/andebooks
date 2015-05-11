@@ -10,43 +10,40 @@ var user = require('../controllers/user.controller');
 
 module.exports = function(app){
 
-  userRouter.post('/users', user.addUser);//delete this after adding users to database
-
   userRouter.post('/authenticate', user.authenticateUser);
 
-  userRouter.get('/users', user.getUsers);
+  // //middleware in charge of all user requests
+  // userRouter.use(function(req, res, next){
+  //   //check post parameters for token
+  //   var token = req.headers['x-access-token'];
 
-  userRouter.get('/user/:user_id', user.getOneUser);
+  //   //if there is a token, decode it
+  //   if(token){
+  //     jwt.verify(token, superSecret, function(err, decoded){
+  //       if(err){
+  //         res.json({
+  //           message: 'Token could not be authenticated'
+  //         });
+  //       }
+  //       else{
+  //         req.decoded = decoded;
+  //         //console.log(req.decoded);
+  //         next();
+  //       }
+  //     });
+  //   }else{
+  //     return res.status(403).json({
+  //       message: 'Token not found'
+  //     });
+  //   }
+  // });
 
-  //middleware in charge of all user requests
-  userRouter.use(function(req, res, next){
-    //check post parameters for token
-    var token = req.headers['x-access-token'];
-
-    //if there is a token, decode it
-    if(token){
-      jwt.verify(token, superSecret, function(err, decoded){
-        if(err){
-          res.json({
-            message: 'Token could not be authenticated'
-          });
-        }
-        else{
-          req.decoded = decoded;
-          //console.log(req.decoded);
-          next();
-        }
-      });
-    }else{
-      return res.status(403).json({
-        message: 'Token not found'
-      });
-    }
-  });
-
-  // userRouter.post('/users', user.addUser);
+  userRouter.route('/users')
+    .get(user.verifyToken, user.getUsers)
+    .post(user.addUser);
 
   userRouter.route('/user/:user_id')
+    .get(user.getOneUser)
     .put(user.updateUser)
     .delete(user.deleteUser);
 

@@ -16,7 +16,9 @@ var UserSchema = new Schema({
   email: {
     type: String
   },
-  admin: Boolean
+  token: {
+    type: String
+  }
 });
 
 mongoose.model('User', UserSchema);
