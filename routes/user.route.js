@@ -10,7 +10,13 @@ var user = require('../controllers/user.controller');
 
 module.exports = function(app){
 
+  userRouter.post('/users', user.addUser);//delete this after adding users to database
+
   userRouter.post('/authenticate', user.authenticateUser);
+
+  userRouter.get('/users', user.getUsers);
+
+  userRouter.get('/user/:user_id', user.getOneUser);
 
   //middleware in charge of all user requests
   userRouter.use(function(req, res, next){
@@ -38,12 +44,9 @@ module.exports = function(app){
     }
   });
 
-  userRouter.route('/users')
-    .get(user.getUsers)
-    .post(user.addUser);
+  // userRouter.post('/users', user.addUser);
 
   userRouter.route('/user/:user_id')
-    .get(user.getOneUser)
     .put(user.updateUser)
     .delete(user.deleteUser);
 
