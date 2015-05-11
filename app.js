@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 
 //mongodb connection
-mongoose.connect('mongodb://localhost/andebooks_db');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/andebooks_db');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
