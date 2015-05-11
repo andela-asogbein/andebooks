@@ -8,7 +8,7 @@ var user = require('../controllers/user.controller');
 
 module.exports = function(app){
   bookRouter.route('/books')
-    .get(book.getBooks)
+    .get(user.verifyToken, book.getBooks)
     .post(book.addBook);
 
   bookRouter.route('/book/:book_id')
