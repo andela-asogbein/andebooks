@@ -3,9 +3,12 @@
 var mongoose = require('mongoose');
 require("../models/book.model");
 var Book = mongoose.model("Book");
+var User = mongoose.model("User");
+
 
 module.exports = {
   addBook: function(req, res){
+
     Book.create(req.body, function(err, book){
       if(err){
         return res.json(err);
@@ -27,16 +30,16 @@ module.exports = {
   getOneBook: function(req, res){
     Book.findById({_id: req.params.book_id}, function(err, book){
       if(err){
-        return res.json(err)
+        return res.json(err);
       }
       res.status(200).json(book);
-    })
+    });
   },
 
   updateBook: function(req, res){
     Book.update({_id: req.params.book_id}, req.body, function(err, book){
       if(err){
-        return res.json(err)
+        return res.json(err);
       }
       res.status(201).json(book);
     });
@@ -48,7 +51,26 @@ module.exports = {
         return res.json(err);
       }
       res.status(200).json(book);
-    })
-  }
+    });
+  },
 
+  searchBooks: function(req, res){
+    var titleExpression = new RegExp(req.query.title, 'ig');
+    Book.find({title: titleExpression}, function(err, books){
+      if(err){
+        return res.json(err);
+      }
+      res.status(200).json(books);
+    });
+  },
+
+  searchAuthors: function(req, res){
+    var authorExpression = new RegExp(req.query.author, 'ig');
+    Book.find({author: authorExpression}, function(err, books){
+      if(err){
+        return res.json(err);
+      }
+      res.status(200).json(books);
+    });
+  }
 };

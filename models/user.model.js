@@ -11,14 +11,17 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: 'Choose a password'
+    required: 'Choose a password',
+    validate: [
+      function(password){
+        return password.length >= 6;
+      },'Password should be longer than 6 characters'
+    ]
   },
   email: {
-    type: String
+    type: String,
+    match: /.+\@.+\..+/
   },
-  token: {
-    type: String
-  }
 });
 
 mongoose.model('User', UserSchema);

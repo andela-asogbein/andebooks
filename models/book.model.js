@@ -28,7 +28,8 @@ var BookSchema = new Schema({
       type: String
     },
     addedBy: {
-      type: String
+      type: Schema.ObjectId,
+      ref: 'User'
     }
 });
 
