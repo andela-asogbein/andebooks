@@ -3,12 +3,9 @@
 var mongoose = require('mongoose');
 require("../models/book.model");
 var Book = mongoose.model("Book");
-var User = mongoose.model("User");
-
 
 module.exports = {
   addBook: function(req, res){
-
     Book.create(req.body, function(err, book){
       if(err){
         return res.json(err);
