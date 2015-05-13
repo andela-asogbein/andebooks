@@ -24,7 +24,8 @@ module.exports = {
         });
       }
       else{
-        if(req.body.password != user.password){
+        var validPassword = user.comparePassword(req.body.password);
+        if(!validPassword){
           res.json({
             message: 'Wrong password'
           });
@@ -38,7 +39,7 @@ module.exports = {
           });//end var token
           res.json({
             success: true,
-            message: 'Token given freely',
+            message: 'Token Generated',
             token: token
           });
         }
@@ -73,7 +74,13 @@ module.exports = {
   addUser: function(req, res){
     User.create(req.body, function(err, user){
       if(err){
-        return res.json(err);
+        if(err.code ===  11000){
+          res.json({message: 'Username or Email already taken'})
+        }
+        else{
+          res.json({message : err.errors.email.message});
+        }
+        res.json(err);
       }
       res.status(201).json(user);
     });
@@ -84,7 +91,7 @@ module.exports = {
       if(err){
         return res.json(err);
       }
-      res.status(201).json(users);
+      res.status(200).json(users);
     });
   },
 
