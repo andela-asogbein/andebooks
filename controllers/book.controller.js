@@ -69,5 +69,16 @@ module.exports = {
       }
       res.status(200).json(books);
     });
+  },
+
+  getRandomBook: function(req, res){
+    Book.find({}).exec(function(err, books){
+      if(err){
+        return res.json(err);
+      }
+      var booksLength = books.length;
+      var randomBook = Math.floor(Math.random()*booksLength);
+      res.status(200).json(books[randomBook]);
+    });
   }
 };
