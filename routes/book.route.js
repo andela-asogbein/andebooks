@@ -7,8 +7,6 @@ var book = require('../controllers/book.controller');
 var user = require('../controllers/user.controller');
 
 module.exports = function(app){
-  bookRouter.get('/', 'Welcome');
-
   bookRouter.route('/books/')
     .get(book.getBooks)
     .post(user.verifyToken, book.addBook);
