@@ -21,9 +21,11 @@ module.exports = function(app){
     .put(user.verifyToken, user.updateUser)
     .delete(user.verifyToken, user.deleteUser);
 
-  userRouter.get('/me', function(req, res){
-    res.send(req.decoded);
+  userRouter.get('/me', user.verifyToken, function(req, res){
+    res.send(req.user);
   });
+
+  userRouter.get('/user/username/:username',user.getByUsername);
 
   app.use('/api', userRouter);
 };

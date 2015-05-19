@@ -1,12 +1,28 @@
 'use strict';
 
 var mongoose = require('mongoose');
+
 require("../models/book.model");
+require("../models/user.model");
+
 var Book = mongoose.model("Book");
+var User = mongoose.model("User");
 
 module.exports = {
-  addBook: function(req, res){
+
+  addBook2: function(req, res){
     Book.create(req.body, function(err, book){
+      if(err){
+        return res.json(err);
+      }
+      res.status(201).json(book);
+    });
+  },
+
+  addBook: function(req, res){
+    console.log(req.body);
+    var book = new Book(req.body);
+    book.save(function(err, book){
       if(err){
         return res.json(err);
       }
@@ -16,7 +32,7 @@ module.exports = {
 
   getBooks: function(req, res){
     // console.log(Book);
-    Book.find({}).exec(function(err, books){
+    Book.find({}).populate('addedBy').exec(function(err, books){
       if(err){
         return res.json(err);
       }
@@ -64,6 +80,16 @@ module.exports = {
   searchAuthors: function(req, res){
     var authorExpression = new RegExp(req.query.author, 'ig');
     Book.find({author: authorExpression}, function(err, books){
+      if(err){
+        return res.json(err);
+      }
+      res.status(200).json(books);
+    });
+  },
+
+  searchCategories: function(req, res){
+    var categoryExpression = new RegExp(req.query.subject, 'ig');
+    Book.find({subject: categoryExpression}, function(err, books){
       if(err){
         return res.json(err);
       }

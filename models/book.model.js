@@ -17,9 +17,6 @@ var BookSchema = new Schema({
       type: String,
       required: 'Enter description of the book so others know what it is about'
     },
-    available: {
-      type: Boolean
-    },
     pages: {
       type: Number,
       min: 1
@@ -28,7 +25,8 @@ var BookSchema = new Schema({
       type: String
     },
     addedBy: {
-      type: String
+      type: Schema.ObjectId,
+      ref: 'User'
     }
 });
 

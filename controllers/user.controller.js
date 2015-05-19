@@ -52,14 +52,14 @@ module.exports = {
 
     //if there is a token, decode it
     if(token){
-      jwt.verify(token, superSecret, function(err, decoded){
+      jwt.verify(token, superSecret, function(err, user){
         if(err){
-          res.json({
+          return res.json({
             message: 'Token could not be authenticated'
           });
         }
         else{
-          req.decoded = decoded;
+          req.user = user;
           //console.log(req.decoded);
           next();
         }
@@ -97,6 +97,15 @@ module.exports = {
 
   getOneUser: function(req, res){
     User.findById({_id: req.params.user_id}, function(err, user){
+      if(err){
+        return res.json(err);
+      }
+      res.status(201).json(user);
+    });
+  },
+
+   getByUsername: function(req, res){
+    User.findOne({username: req.params.username}, function(err, user){
       if(err){
         return res.json(err);
       }

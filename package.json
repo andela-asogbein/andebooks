@@ -1,7 +1,7 @@
 {
   "name": "andebooks",
   "version": "0.0.1",
-  "description": "A web app to simplify the process of tracking and borrowing books in a library e.g. the Andela Library.",
+  "description": "An API for creating a book catalogue.",
   "main": "server.js",
   "scripts": {
     "test": ""

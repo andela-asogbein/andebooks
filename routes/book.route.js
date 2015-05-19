@@ -13,6 +13,7 @@ module.exports = function(app){
 
   bookRouter.get('/books/search/book', book.searchBooks);
   bookRouter.get('/books/search/author', book.searchAuthors);
+  bookRouter.get('/books/search/category', book.searchCategories);
   bookRouter.get('/books/random', book.getRandomBook);
 
   bookRouter.route('/book/:book_id')
